@@ -4,7 +4,29 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LeoLogo from '../../images/LeoLogo.png'
 import Fimage from './LEO.jpg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const Featured = ({type}) => {
+  const [content,setContent] = useState({});
+
+  useEffect(()=>{
+    const randomContent = async ()=>{
+      try{
+        const res = await axios.get(`http://localhost:3000/api/movies/random?type=${type}`,{
+          headers:{
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwMzg2ODAzOCwiZXhwIjoxNzA0MzAwMDM4fQ.HDWGwcrglsowbaoTh1_OZx4T9BsrCdd5jvNnp3l0Quk"
+          },
+        });
+        setContent(res.data[0]);
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    randomContent();
+  },[type]);
+console.log(content);
+
   return (
     <div className='featured'>
        {type && (
@@ -28,13 +50,13 @@ const Featured = ({type}) => {
           </select>
         </div>
       )}
-    <img width="100%" src={Fimage} ></img> 
+    <img width="100%" src={content.img} ></img> 
     <div className='info'>
-        <img src={LeoLogo}></img>
+        <img src={content.imgTitle}></img>
     
     <div className='description'>
         <span>
-        In a world on the brink of chaos, 'Ephemeral Horizon' unfolds a gripping tale of love, sacrifice, and redemption. As society crumbles under the weight of a mysterious pandemic, brilliant scientist Dr. Elena Hart races against time to discover a cure. "
+        {content.desc}
         </span>
     </div>
       <div className='buttons'>

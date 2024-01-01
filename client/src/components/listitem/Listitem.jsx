@@ -3,6 +3,7 @@ import './ListItem.scss'
 import { useEffect, useState } from 'react'
 import animal from '../../images/animal.mp4'
 import axios from 'axios'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 const Listitem = ({index,item}) => {
   const [isHovered,setIsHovered] = useState(false);
   const trailer = "https://drive.google.com/file/d/1K0BUuIe2JEPsvBSWEATgLO_9nhtTx1Vr/view?usp=sharing";
@@ -26,9 +27,10 @@ const Listitem = ({index,item}) => {
     };
     getMovie();
   },[item]);
-  
-  console.log(movie);
+
   return (
+    <Link to={{ pathname: '/watch', state: { movie: movie } }}>
+
     <div className='listItem' onMouseEnter={()=>{setIsHovered(true)}} onMouseLeave={()=>{setIsHovered(false)}}
     style={{left: isHovered && (index*220) - 50 + (index*2.5)}} >
       <img src='https://wallpapercave.com/wp/wp8807405.jpg'></img>
@@ -53,6 +55,8 @@ const Listitem = ({index,item}) => {
         <div className='genre'>{movie.genre}</div>
       </div></>}
     </div>
+    </Link> 
+    
   )
 }
 

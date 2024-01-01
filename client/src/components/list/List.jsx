@@ -22,7 +22,7 @@ const List = ({list}) => {
             
         }
     }
-    console.log("This is list",list);
+
   return (
     <div className='list'>
       <span className='listTitle'>
