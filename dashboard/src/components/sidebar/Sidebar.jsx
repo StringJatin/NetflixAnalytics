@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Sidebar.css"
 import LineStyleIcon from '@mui/icons-material/LineStyle';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -15,6 +15,13 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ReportIcon from '@mui/icons-material/Report';
 import {Link} from "react-router-dom"
 const Sidebar = () => {
+
+  const [activeTab,setActiveTab] = useState(1);
+
+  const handleOnClick=(tab)=>{
+    setActiveTab(tab);
+  }
+
   return (
     <div className='sidebar'>
       <div className='sidebarWrapper'>
@@ -24,7 +31,7 @@ const Sidebar = () => {
             </h3>
             <ul className='sidebarList'>
             <Link to="/" className='noCss'>
-                <li className='sidebarListItem active'>
+                <li className={`sidebarListItem ${activeTab ===1 ? 'active' : ''}`} onClick={()=>{handleOnClick(1)}} >
                 <LineStyleIcon className='sidebarIcon'/>
                 Home
                 </li>
@@ -43,14 +50,14 @@ const Sidebar = () => {
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
           <Link to="/user" className='noCss'>
-              <li className="sidebarListItem">
+          <li className={`sidebarListItem ${activeTab ===2 ? 'active' : ''}`} onClick={()=>{handleOnClick(2)}}>
                 <PermIdentityIcon className="sidebarIcon" />
               Users  
               </li>
               </Link>
            
            <Link to={"/products"} className='noCss'>
-              <li className="sidebarListItem">
+           <li className={`sidebarListItem ${activeTab ===3 ? 'active' : ''}`} onClick={()=>{handleOnClick(3)}}>
                 <StorefrontIcon className="sidebarIcon" />
                 Products
               </li>
