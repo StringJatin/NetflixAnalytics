@@ -1,0 +1,121 @@
+.product{
+    flex: 4;
+    padding: 20px;
+}
+.productTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productAddButton{
+    padding: 6px;
+    width: 80px;
+    color: white;
+    background-color: teal;
+    border-radius: 7px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+
+}
+.productTop {
+    display: flex;
+  }
+
+.productTopLeft, .productTopRight{
+    flex: 1;
+}
+.productInfoImg{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.productTopRight {
+    padding: 20px;
+    margin: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  }
+  .productInfoTop{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+  }
+  .productInfoBottom{
+    width: 50%;
+  
+  }
+  .productInfoItem{
+    display: flex;
+    justify-content: space-between;
+    
+    margin-top: 10px;
+  }
+  .productInfoKey{
+    color: gray;
+  }
+  
+  .productBottom{
+    padding: 20px;
+    margin: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  }
+
+  .productForm{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+  }
+  .productUploadImg{
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+  }
+  .productFormLeft{
+    display: flex;
+    flex-direction: column;
+  }
+  .productFormLeft > label {
+    margin-bottom: 10px;
+    color: gray;
+  }
+  
+  .productFormLeft > input {
+    margin-bottom: 10px;
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid gray;
+  }
+  
+  .productFormLeft >select{
+    margin-bottom: 10px;
+  }
+  .productFormRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .productUpload{
+    display: flex;
+    align-items: center;
+  }
+  .productUploadIcon{
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .productButton{
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    background-color: #365486;;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }

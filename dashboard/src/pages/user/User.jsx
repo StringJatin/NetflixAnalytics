@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./user.css"
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { rows } from '../../dummyData';
+import { Link } from 'react-router-dom';
 const User = () => {
-  
-
+  const [data,setData] = useState(rows);
+const handleDelete=(id)=>{
+      setData(data.filter((item)=>item.id!==id));
+}
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   {
@@ -35,6 +40,22 @@ const columns = [
     editable: true,
   },
   {
+    field: 'Action',
+    headerName: 'Action',
+    width:150,
+    renderCell: (params)=>{
+      // {console.log(params)}
+      return (
+        <>
+        <Link to={"/user/" + params.row.id}>
+        <button className='userListEdit'>Edit</button>
+        </Link>
+        <DeleteIcon className='userListDelete' onClick={()=>{handleDelete(params.row.id)}}  />
+        </>
+      )
+    }
+  },
+  {
     field: 'Email',
     headerName: 'Email',
     width:150,
@@ -42,37 +63,25 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 2, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 3, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 4, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 5, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 6, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 7, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 8, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 9, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
-  { id: 10, Username: 'Snow', Avatar: 'Jon', Email: "john@gmail.com", status: "Active", Transaction:"$100.00" },
 
- 
-];
 
   return (
     <div className='user'>
-       <Box sx={{ height: 400, width: '100%' }}>
+       <Box sx={{ height: 600, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
+        disableRowSelectionOnClick
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 8,
             },
           },
         }}
         pageSizeOptions={[5]}
         checkboxSelection
-        disableRowSelectionOnClick
+        
       />
     </Box>
     </div>

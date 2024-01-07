@@ -38,4 +38,9 @@
 .sidebarIcon{
     margin-right: 5px;
     font-size: 20px !important;
+    
+}
+.noCss{
+    text-decoration: none !important;
+    color: inherit;
 }

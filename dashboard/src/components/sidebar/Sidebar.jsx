@@ -3,7 +3,7 @@ import "./Sidebar.css"
 import LineStyleIcon from '@mui/icons-material/LineStyle';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import NotificationsNone from '@mui/icons-material/NotificationsNone';
+// import NotificationsNone from '@mui/icons-material/NotificationsNone';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -13,6 +13,7 @@ import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ReportIcon from '@mui/icons-material/Report';
+import {Link} from "react-router-dom"
 const Sidebar = () => {
   return (
     <div className='sidebar'>
@@ -22,10 +23,12 @@ const Sidebar = () => {
                 Dashboard
             </h3>
             <ul className='sidebarList'>
+            <Link to="/" className='noCss'>
                 <li className='sidebarListItem active'>
                 <LineStyleIcon className='sidebarIcon'/>
-                    Home
+                Home
                 </li>
+                </Link>
                 <li className='sidebarListItem'>
                 <TimelineIcon className='sidebarIcon'/>
                     Analytics
@@ -39,17 +42,19 @@ const Sidebar = () => {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-           
+          <Link to="/user" className='noCss'>
               <li className="sidebarListItem">
                 <PermIdentityIcon className="sidebarIcon" />
-                Users
+              Users  
               </li>
+              </Link>
            
-           
+           <Link to={"/products"} className='noCss'>
               <li className="sidebarListItem">
                 <StorefrontIcon className="sidebarIcon" />
                 Products
               </li>
+              </Link>
            
             <li className="sidebarListItem">
               <AttachMoneyIcon className="sidebarIcon" />
