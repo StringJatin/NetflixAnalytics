@@ -2,13 +2,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./Home.css";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import Chart from "../../components/chart/Chart";
-import { data } from "../../dummyData";
+
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 
 import axios from "axios";
 
+
 const Home = () => {
+
   const [userStats, setUserStats] = useState();
   const MONTHS = useMemo(() => [
     "Jan",
@@ -25,6 +27,7 @@ const Home = () => {
     "Dec",
   ],[]
   );
+ 
   useEffect(() => {
     const getStats = async () => {
       try {

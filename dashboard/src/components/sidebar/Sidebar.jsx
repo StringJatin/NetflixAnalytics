@@ -14,6 +14,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ReportIcon from '@mui/icons-material/Report';
 import {Link} from "react-router-dom"
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const Sidebar = () => {
 
   const [activeTab,setActiveTab] = useState(1);
@@ -56,10 +57,10 @@ const Sidebar = () => {
               </li>
               </Link>
            
-           <Link to={"/products"} className='noCss'>
+           <Link to={"/movies"} className='noCss'>
            <li className={`sidebarListItem ${activeTab ===3 ? 'active' : ''}`} onClick={()=>{handleOnClick(3)}}>
-                <StorefrontIcon className="sidebarIcon" />
-                Products
+                <PlayArrowIcon className="sidebarIcon" />
+                Movies
               </li>
               </Link>
            
