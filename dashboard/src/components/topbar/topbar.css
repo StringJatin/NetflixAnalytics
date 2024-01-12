@@ -4,7 +4,7 @@
     background-color: #DCF2F1;
     position:sticky;
     top: 0;
-    z-index: 999;
+    z-index: 10999;
 }
 .topbarWrapper{
     height: 100%;
