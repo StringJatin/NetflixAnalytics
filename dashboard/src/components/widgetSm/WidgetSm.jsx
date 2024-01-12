@@ -12,7 +12,7 @@ const WidgetSm = () => {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDczMzQ5NSwiZXhwIjoxNzA1MTY1NDk1fQ.MJQzibK2uPQgTxd-JvVrlYa_r3UzBYaLO1i52KfdKMY",
+              `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );

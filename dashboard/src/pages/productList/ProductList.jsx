@@ -2,7 +2,6 @@ import "./ProductList.css";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -15,7 +14,7 @@ const ProductList = () => {
         const res = await axios.get("http://localhost:3000/api/movies/", {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDczMzQ5NSwiZXhwIjoxNzA1MTY1NDk1fQ.MJQzibK2uPQgTxd-JvVrlYa_r3UzBYaLO1i52KfdKMY",
+            `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setData(res.data);
@@ -32,7 +31,7 @@ const ProductList = () => {
     try{
         await axios.delete(`http://localhost:3000/api/movies/${id}`,{
           headers:{
-            token : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDczMzQ5NSwiZXhwIjoxNzA1MTY1NDk1fQ.MJQzibK2uPQgTxd-JvVrlYa_r3UzBYaLO1i52KfdKMY"
+            token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           }
         });
     }
