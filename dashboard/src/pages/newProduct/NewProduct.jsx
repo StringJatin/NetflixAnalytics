@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./newProduct.css";
 import storage from "../../firebase";
+import axios from "axios";
 
 export default function NewProduct() {
   const [movie, setMovie] = useState(null);
@@ -50,7 +51,27 @@ export default function NewProduct() {
       { file: video, label: "video" },]);
 
   };
-  console.log(movie);
+  const handelCreate = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:3000/api/movies/', movie, {
+        headers: {
+          token: `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+  
+      if (!res.data) {
+        throw new Error('Failed to create movie');
+      }
+  
+  
+      // Handle success, reset form, navigate to another page, etc.
+  
+    } catch (err) {
+      console.error('Error creating movie:', err);
+      // Handle error, show error message, etc.
+    }
+  }
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Movie</h1>
@@ -113,7 +134,7 @@ export default function NewProduct() {
           <input type="file" name="video"  onChange={(e) => setVideo(e.target.files[0])} />
         </div>
         {
-          uploaded === 5 ? (<button className="addProductButton" >Create</button>) : (<button className="addProductButton" onClick={handelUpload}>Upload</button>)
+          uploaded === 5 ? (<button className="addProductButton" onClick={handelCreate} >Create</button>) : (<button className="addProductButton" onClick={handelUpload}>Upload</button>)
         }
         
       </form>
