@@ -16,7 +16,7 @@ const Product = () => {
           {
             headers: {
               token:
-              `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
+              `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTQ3ODMyMywiZXhwIjoxNzA1OTEwMzIzfQ.WBhQD-ZOB3oiGHbkul7225-3M3h9iGIZAeAZ7vOR4v8` ,
             },
           }
         );
@@ -28,6 +28,7 @@ const Product = () => {
 
     getMovie();
   }, [productId]);
+  
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -49,7 +50,7 @@ const Product = () => {
         <div className="productTopRight">
           <div className="productInfoTop">
             <img
-              src="https://www.digitaltrends.com/wp-content/uploads/2023/02/Apple-headset-render-Ahmed-Chenni-2-1500.jpg?fit=720%2C720&p=1"
+             src={`${movie} ? "" : ""`}
               className="productInfoImg"
               alt=""
             />
@@ -57,8 +58,8 @@ const Product = () => {
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
-              <span className="productInfoKey">Id:</span>
-              <span className="productInfoValue">123</span>
+              <span className="productInfoKey">Id: </span>
+              <span className="productInfoValue">{movie  ? `${movie._id}` : "Enter Title"}</span>
             </div>
             <div className="productInfoItem">
               <span className="productInfoKey">Sales:</span>
@@ -114,7 +115,7 @@ const Product = () => {
           <div className="productFormRight">
             <div className="productUpload">
               <img
-                src="https://www.digitaltrends.com/wp-content/uploads/2023/02/Apple-headset-render-Ahmed-Chenni-2-1500.jpg?fit=720%2C720&p=1"
+                src={`${movie} ? "": ""`}
                 alt=""
                 className="productUploadImg"
               />

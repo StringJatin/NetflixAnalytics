@@ -1,4 +1,4 @@
-import "./ProductList.css";
+import './movieLists.css'
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const ProductList = () => {
+const MovieLists = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const getMovieList = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/movies/", {
+        const res = await axios.get("http://localhost:3000/api/lists/", {
           headers: {
             token:
             `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTQ3ODMyMywiZXhwIjoxNzA1OTEwMzIzfQ.WBhQD-ZOB3oiGHbkul7225-3M3h9iGIZAeAZ7vOR4v8`,
@@ -25,31 +25,33 @@ const ProductList = () => {
 
     // Call the function when the component mounts
     getMovieList();
-  }, [data]); // Empty dependency array to ensure it runs only once
+  }, []); // Empty dependency array to ensure it runs only once
  
   const handleDelete = async(id) => {
     try{
-        await axios.delete(`http://localhost:3000/api/movies/${id}`,{
+        await axios.delete(`http://localhost:3000/api/lists/${id}`,{
           headers:{
             token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           }
         });
+        setData((prevItems) => prevItems.filter(item => item._id !== id));
     }
     catch(err){
       console.log(err);
     }
+
   };
   const columns = [
-    { field: "_id", headerName: "ID", width: 70 },
+    { field: "_id", headerName: "ID", width: 100 },
     {
-      field: "movie",
-      headerName: "Movie",
-      width: 250,
+      field: "title",
+      headerName: "Title",
+      width: 350,
       editable: true,
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.img} alt=""></img>
+            {/* <img className="userListImg" src={params.row.img} alt=""></img> */}
             {params.row.title}
           </div>
         );
@@ -62,23 +64,13 @@ const ProductList = () => {
       editable: true,
     },
     {
-      field: "year",
-      headerName: "Year",
+      field: "type",
+      headerName: "Type",
       type: "string",
       width: 90,
       editable: true,
     },
-    { field: "limit", headerName: "Age Limit", width: 90 },
-    {
-      field: "isSeries",
-      headerName: "Category",
-      width: 90,
-      renderCell: (params) => (
-        <>
-          {params.value === true ? <p>Series</p> : <p>Movie</p>}
-        </>
-      ),
-    },
+    // { field: "content", headerName: "Content", width: 90 },
     {
       field: "Action",
       headerName: "Action",
@@ -87,7 +79,7 @@ const ProductList = () => {
         // {console.log(params)}
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
+            <Link to={"/movieLists/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteIcon
@@ -101,9 +93,8 @@ const ProductList = () => {
       },
     },
   ];
-
   return (
-    <div className="productList">
+    <div className='movieLists'>
       <Box sx={{ height: 600, width: "100%" }}>
         <DataGrid
           rows={data}
@@ -122,7 +113,8 @@ const ProductList = () => {
         />
       </Box>
     </div>
-  );
-};
+  )
+}
 
-export default ProductList;
+export default MovieLists;
+

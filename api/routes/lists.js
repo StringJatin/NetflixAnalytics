@@ -37,6 +37,20 @@ router.delete("/:id",verify, async(req,res)=>{
         res.status(403).json("You are not allowed");
     }
 });
+//get single list information
+router.get("/find/:id", verify, async(req,res)=>{
+  try{
+      const list = await List.findById(req.params.id);
+      res.status(200).json(list);
+
+
+
+  }
+  catch(err){
+      res.status(500).json(err);
+
+  }
+});
 
 //Get
 
