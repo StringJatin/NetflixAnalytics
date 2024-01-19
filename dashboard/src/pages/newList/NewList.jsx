@@ -46,7 +46,7 @@ export default function NewList() {
         try {
           const newMovie = await axios.post("http://localhost:3000/api/lists/", list, {
             headers: {
-              token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTU1NjkyNywiZXhwIjoxNzA1OTg4OTI3fQ.K7HXgiYiRYM8lpSfPSd3aMFrCsAJkn95bpOj78rO2zg"
+                token :'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
             },
           });
           console.log("New list is created")
