@@ -167,7 +167,7 @@ export default function NewProduct() {
               style={{ width: `${uploadProgress}%` }}
             ></div>
             {
-              uploadProgress === 100 && <p>File Uploaded successfully!</p>
+              uploadProgress === 100 && <p>Files Uploaded successfully!</p>
             }
             
           </div>
