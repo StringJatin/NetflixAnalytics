@@ -12,11 +12,38 @@ export default function NewProduct() {
   const [video, setVideo] = useState(null);
   const [uploaded, setUploaded] = useState(0);
 
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const handleChange = (e) => {
     const value = e.target.value;
     setMovie((prevMovie) => ({ ...prevMovie, [e.target.name]: value }));
   }
 
+  // const upload = (items) => {
+  //   items.forEach((item) => {
+  //     const fileName = new Date().getTime() + item.label + item.file.name;
+  //     const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+  //     uploadTask.on(
+  //       "state_changed",
+  //       (snapshot) => {
+  //         const progress =
+  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //         console.log("Upload is " + progress + "% done");
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //       () => {
+  //         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+  //           setMovie((prev) => {
+  //             return { ...prev, [item.label]: url };
+  //           });
+  //           setUploaded((prev) => prev + 1);
+  //         });
+  //       }
+  //     );
+  //   });
+  // };
   const upload = (items) => {
     items.forEach((item) => {
       const fileName = new Date().getTime() + item.label + item.file.name;
@@ -26,7 +53,7 @@ export default function NewProduct() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          setUploadProgress(progress);
         },
         (error) => {
           console.log(error);
@@ -64,7 +91,7 @@ export default function NewProduct() {
         throw new Error('Failed to create movie');
       }
   
-  
+      alert("File created successfully!");
       // Handle success, reset form, navigate to another page, etc.
   
     } catch (err) {
@@ -133,6 +160,18 @@ export default function NewProduct() {
           <label>Video</label>
           <input type="file" name="video"  onChange={(e) => setVideo(e.target.files[0])} />
         </div>
+        {uploadProgress > 0 && uploadProgress <= 100 && (
+          <div className="progress-bar">
+            <div
+              className="progress-bar-fill"
+              style={{ width: `${uploadProgress}%` }}
+            ></div>
+            {
+              uploadProgress === 100 && <p>File Uploaded successfully!</p>
+            }
+            
+          </div>
+        )}
         {
           uploaded === 5 ? (<button className="addProductButton" onClick={handelCreate} >Create</button>) : (<button className="addProductButton" onClick={handelUpload}>Upload</button>)
         }
