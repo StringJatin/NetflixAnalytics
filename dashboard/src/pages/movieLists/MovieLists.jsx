@@ -11,7 +11,7 @@ const MovieLists = () => {
   useEffect(() => {
     const getMovieList = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/lists/", {
+        const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/lists/", {
           headers: {
             token:
             'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,

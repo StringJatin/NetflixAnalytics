@@ -11,7 +11,7 @@ const ProductList = () => {
   useEffect(() => {
     const getMovieList = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/movies/", {
+        const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/movies/", {
           headers: {
             token:
             'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
@@ -29,7 +29,7 @@ const ProductList = () => {
  
   const handleDelete = async(id) => {
     try{
-        await axios.delete(`http://localhost:3000/api/movies/${id}`,{
+        await axios.delete(`https://netflix-analytics-4u5n.vercel.app/api/movies/${id}`,{
           headers:{
             token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           }

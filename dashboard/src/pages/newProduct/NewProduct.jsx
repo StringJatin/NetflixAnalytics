@@ -81,7 +81,7 @@ export default function NewProduct() {
   const handelCreate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/movies/', movie, {
+      const res = await axios.post('https://netflix-analytics-4u5n.vercel.app/api/movies/', movie, {
         headers: {
           token: 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
         },

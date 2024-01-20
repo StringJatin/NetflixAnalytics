@@ -14,7 +14,7 @@ const List = () => {
     const getMovie = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/lists/find/${id}`,
+          `https://netflix-analytics-4u5n.vercel.app/api/lists/find/${id}`,
           {
             headers: {
               token:

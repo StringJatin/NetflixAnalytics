@@ -12,7 +12,7 @@ const Product = () => {
     const getMovie = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/movies/find/${productId}`,
+          `https://netflix-analytics-4u5n.vercel.app/api/movies/find/${productId}`,
           {
             headers: {
               token:

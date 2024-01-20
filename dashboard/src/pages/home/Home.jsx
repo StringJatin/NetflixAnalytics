@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/users/stats", {
+        const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/users/stats", {
           headers: {
             token:
             'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,

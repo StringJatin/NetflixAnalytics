@@ -8,7 +8,7 @@ const WidgetSm = () => {
     const getNewUsers = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/users?new=true",
+          "https://netflix-analytics-4u5n.vercel.app/api/users?new=true",
           {
             headers: {
               token:
