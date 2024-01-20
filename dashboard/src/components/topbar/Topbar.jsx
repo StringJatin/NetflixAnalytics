@@ -33,7 +33,7 @@ const Topbar = () => {
                     <SettingsIcon/>
                 
                 </div>
-                <img src='https://play-lh.googleusercontent.com/C9CAt9tZr8SSi4zKCxhQc9v4I6AOTqRmnLchsu1wVDQL0gsQ3fmbCVgQmOVM1zPru8UH=w240-h480-rw' className='topAvatar' alt='' />
+                <img src='https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png' className='topAvatar' alt='' />
             </div>
         </div>
       </div>

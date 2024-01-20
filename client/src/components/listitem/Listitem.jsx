@@ -1,63 +1,66 @@
-import { Add, PlayArrow, ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material'
-import './ListItem.scss'
-import { useEffect, useState } from 'react'
-import animal from '../../images/animal.mp4'
-import axios from 'axios'
-import { Link, Navigate, useLocation } from 'react-router-dom'
-const Listitem = ({index,item}) => {
-  const [isHovered,setIsHovered] = useState(false);
-  const trailer = "https://drive.google.com/file/d/1K0BUuIe2JEPsvBSWEATgLO_9nhtTx1Vr/view?usp=sharing";
-  
-  const [movie,setMovie] = useState({});
+import { Add, PlayArrow, ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material';
+import './ListItem.scss';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-  useEffect(()=>{
-    const getMovie = async ()=>{
-      try{
-        const res = await axios.get("http://localhost:3000/api/movies/find/"+item,{
+const ListItem = ({ index, item }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/api/movies/find/${item}`, {
           headers: {
-            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDk5MjM0MSwiZXhwIjoxNzA1NDI0MzQxfQ.aL8BXWr3VlbxasWK2-_2VEXWjCBO7DRJT49p2cJafe4",
-
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTY1NTA2NiwiZXhwIjoxNzA2MDg3MDY2fQ.BYVU_F_4KQD7wFgQPABRxmPhbOZOdpWCW2BmnbTYv-o",
           },
         });
-        setMovie(res.data); 
-      }
-      catch(err){
+        setMovie(res.data);
+        setIsLoading(false);
+      } catch (err) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     getMovie();
-  },[item]);
+  }, []);
 
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+// console.log("movie",movie);
   return (
     <Link to={{ pathname: '/watch', state: { movie: movie } }}>
-
-    <div className='listItem' onMouseEnter={()=>{setIsHovered(true)}} onMouseLeave={()=>{setIsHovered(false)}}
-    style={{left: isHovered && (index*220) - 50 + (index*2.5)}} >
-      <img src='https://wallpapercave.com/wp/wp8807405.jpg'></img>
-    {isHovered && <>
-    {/* <video src={animal} autoPlay={false} loop  ></video> */}
-     <div className='itemInfo'>
-        <div className='icons'>
-          <PlayArrow className='icon' />
-          <Add className='icon'/>
-          <ThumbUpAltOutlined className='icon'/>
-          <ThumbDownAltOutlined className='icon'/>
+      <div
+        className={`listItem ${isHovered ? 'hovered' : ''}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {movie.img ? (
+          <img src={movie.img} alt={movie.title} />
+        ) : (
+          <div>No Image</div>
+        )}
+        <div className='itemInfo'>
+          <div className='icons'>
+            <PlayArrow className='icon' />
+            <Add className='icon' />
+            <ThumbUpAltOutlined className='icon' />
+            <ThumbDownAltOutlined className='icon' />
+          </div>
+          <div className='itemInfoTop'>
+            <span>{movie.duration}</span>
+            <span className='limit'>+{movie.limit}</span>
+            <span>{movie.year}</span>
+          </div>
+          <div className='desc'>{movie.desc}</div>
+          <div className='genre'>{movie.genre}</div>
         </div>
-        <div className='itemInfoTop'>
-          <span>{movie.duration}</span>
-          <span className='limit'>+{movie.limit}</span>
-          <span>1999</span>
+      </div>
+    </Link>
+  );
+};
 
-        </div>
-        <div className='desc'>
-          {movie.desc}
-        </div>
-        <div className='genre'>{movie.genre}</div>
-      </div></>}
-    </div>
-    </Link> 
-    
-  )
-}
-
-export default Listitem
+export default ListItem;

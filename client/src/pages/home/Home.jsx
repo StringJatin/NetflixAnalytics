@@ -17,12 +17,12 @@ export default function Home({type}) {
           {
             headers: {
               token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDk5MjM0MSwiZXhwIjoxNzA1NDI0MzQxfQ.aL8BXWr3VlbxasWK2-_2VEXWjCBO7DRJT49p2cJafe4",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTY1NTA2NiwiZXhwIjoxNzA2MDg3MDY2fQ.BYVU_F_4KQD7wFgQPABRxmPhbOZOdpWCW2BmnbTYv-o",
             },
           }
         );
         setLists(res.data);
-        console.log(res)
+       
       } catch (err) {
         console.log(err);
       }
@@ -30,6 +30,33 @@ export default function Home({type}) {
     getRandomLists();
   }, [type, genre]);
 
+
+  useEffect(() => {
+    const fetchAllMovies = async () => {
+      try {
+        const movieResponse = await axios.get('http://localhost:3000/api/movies/', {
+          headers: {
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTY1NTA2NiwiZXhwIjoxNzA2MDg3MDY2fQ.BYVU_F_4KQD7wFgQPABRxmPhbOZOdpWCW2BmnbTYv-o", // Replace with your actual access token
+          },
+        });
+        const allMovieIds = movieResponse.data.map(movie => movie._id);
+  
+        // Filter out movie IDs that don't exist in the current list
+        setLists(prevLists => prevLists.map(list => ({
+          ...list,
+          content: list.content.filter(movieId => allMovieIds.includes(movieId))
+        })));
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+  
+    fetchAllMovies();
+  }, []);
+  
+
+
+  // console.log("lists content",lists.content);
   return (
     <div className='home'>
       <Navbar/>
@@ -37,8 +64,13 @@ export default function Home({type}) {
       {/* {lists.map((list)=>{
         <List list={list} />
       })} */}
-      {lists.map((list) => (
+      {/* {lists.map((list) => (
         <List list={list} />
+      ))} */}
+      {lists
+      .filter(list => list.content.length > 0) // Filter out lists with no content
+      .map((list) => (
+        <List key={list._id} list={list} />
       ))}
   </div>
   )
