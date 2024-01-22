@@ -11,7 +11,7 @@ export default function NewList() {
         try{
             const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/movies/",{
                 headers: {
-                    token : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTQ3ODMyMywiZXhwIjoxNzA1OTEwMzIzfQ.WBhQD-ZOB3oiGHbkul7225-3M3h9iGIZAeAZ7vOR4v8",
+                    token : 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
     
                 }
                
@@ -44,12 +44,12 @@ export default function NewList() {
     if (list) {
       const createMovie = async () => {
         try {
-          const newMovie = await axios.post("http://localhost:3000/api/lists/", list, {
+          const newMovie = await axios.post("https://netflix-analytics-4u5n.vercel.app/api/lists/", list, {
             headers: {
                 token :'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
             },
           });
-          console.log("New list is created")
+          alert("New list is created")
         } catch (err) {
           console.log(err);
         }

@@ -95,6 +95,12 @@ const MovieLists = () => {
   ];
   return (
     <div className='movieLists'>
+    <div className='listsTop'> <h1 className='movieListsTitle'>All Lists</h1>
+    <Link to="/newList">
+          <button className="productAddButton">Create</button>
+        </Link>
+        </div>
+   
       <Box sx={{ height: 600, width: "100%" }}>
         <DataGrid
           rows={data}
