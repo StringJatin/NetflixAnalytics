@@ -32,34 +32,55 @@ const ListItem = ({ index, item }) => {
   }
 // console.log("movie",movie);
   return (
-    <Link to={{ pathname: '/watch', state: { movie: movie } }}>
-      <div
-        className={`listItem ${isHovered ? 'hovered' : ''}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {movie.img ? (
-          <img src={movie.img} alt={movie.title} />
-        ) : (
-          <div>No Image</div>
-        )}
-        <div className='itemInfo'>
-          <div className='icons'>
-            <PlayArrow className='icon' />
-            <Add className='icon' />
-            <ThumbUpAltOutlined className='icon' />
-            <ThumbDownAltOutlined className='icon' />
-          </div>
-          <div className='itemInfoTop'>
-            <span>{movie.duration}</span>
-            <span className='limit'>+{movie.limit}</span>
-            <span>{movie.year}</span>
-          </div>
-          <div className='desc'>{movie.desc}</div>
-          <div className='genre'>{movie.genre}</div>
-        </div>
+    // <Link to={{ pathname: '/watch', state: { movie: movie } }}>
+    //   <div
+    //     className={`listItem ${isHovered ? 'hovered' : ''}`}
+    //     onMouseEnter={() => setIsHovered(true)}
+    //     onMouseLeave={() => setIsHovered(false)}
+    //   >
+    //     {movie.img ? (
+    //       <img src={movie.img} alt={movie.title} />
+    //     ) : (
+    //       <div>No Image</div>
+    //     )}
+    //     <div className='itemInfo'>
+    //       <div className='icons'>
+    //         <PlayArrow className='icon' />
+    //         <Add className='icon' />
+    //         <ThumbUpAltOutlined className='icon' />
+    //         <ThumbDownAltOutlined className='icon' />
+    //       </div>
+    //       <div className='itemInfoTop'>
+    //         <span>{movie.duration}</span>
+    //         <span className='limit'>+{movie.limit}</span>
+    //         <span>{movie.year}</span>
+    //       </div>
+    //       <div className='desc'>{movie.desc}</div>
+    //       <div className='genre'>{movie.genre}</div>
+    //     </div>
+    //   </div>
+    // </Link>
+    <div className="wrapper">
+        <section id="section1">
+            <div
+              className={`item ${isHovered ? 'hovered' : ''}`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <Link to={{ pathname: '/watch', state: { movie: movie } }}>
+                {movie.img ? (
+                  <img src={movie.img} alt={movie.title} />
+                ) : (
+                  <div>No Image</div>
+                )}
+                {/* <h1 className="heading">{movie.title}</h1>
+                <p className="duration">{movie.duration}</p> */}
+              </Link>
+            </div>
+        </section>
+
+        {/* Repeat similar structure for other sections */}
       </div>
-    </Link>
   );
 };
 
