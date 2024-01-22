@@ -29,7 +29,7 @@ const MovieLists = () => {
  
   const handleDelete = async(id) => {
     try{
-        await axios.delete(`http://localhost:3000/api/lists/${id}`,{
+        await axios.delete(`https://netflix-analytics-4u5n.vercel.app/api/lists/${id}`,{
           headers:{
             token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           }
