@@ -10,31 +10,35 @@ import Home from "./pages/home/Home.jsx";
 import Register from "./pages/register/Register";
 import Watch from "./pages/watch/Watch";
 import Login from "./pages/login/Login";
+import { useContext } from "react";
+import AuthReducer from "./context/authContext/AuthReducer.js";
+import { AuthContext } from "./context/authContext/AuthContext.jsx";
 const App = () => {
-  const user = true;
+  const {user} = useContext(AuthContext);
   return (
     <Router>
       <Routes>
         {user && (
           <>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home  />} />
             <Route path="/movies" element={<Home type="movie" />} />
             <Route path="/series" element={<Home type="series" />} />
           </>
         )}
-        <Route path="/" element={<Navigate to="/register" />}/>
+        <Route path="/" element={<Navigate to="/login" />}/>
         <Route path="/register" element={<Register/>}/>
         <Route path ="/login" element={<Login/>}/>
-        {
-          user && (
+        {/* {
+          !user && (
             <>
-            <Route path="/register" element={ <Navigate to="/" /> } />
-            <Route path="/login" element={ <Navigate to="/" /> } />
+            <Route path="/" element={ <Navigate to={"/login"} /> } />
+            <Route path="/register" element={ <Register /> } />
+            <Route path="/login" element={ <Login /> } />
             <Route path="/watch" element={ <Watch/> } />
 
             </>
           )
-        }
+        } */}
       </Routes>
     </Router>
   );

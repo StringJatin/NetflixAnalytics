@@ -6,15 +6,19 @@ import LeoLogo from '../../images/LeoLogo.png'
 import Fimage from './LEO.jpg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext/AuthContext';
 const Featured = ({type}) => {
   const [content,setContent] = useState({});
+  const {user} = useContext(AuthContext);
+  // console.log(user);
 
   useEffect(()=>{
     const randomContent = async ()=>{
       try{
         const res = await axios.get(`http://localhost:3000/api/movies/random?type=${type}`,{
           headers:{
-            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODljZGI0NDBmNjRjMzM4NGY3NjE0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNTY1NTA2NiwiZXhwIjoxNzA2MDg3MDY2fQ.BYVU_F_4KQD7wFgQPABRxmPhbOZOdpWCW2BmnbTYv-o"
+            token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setContent(res.data[0]);
