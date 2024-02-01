@@ -5,8 +5,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 // import NotificationsNone from '@mui/icons-material/NotificationsNone';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
@@ -72,8 +71,8 @@ const Sidebar = () => {
               </Link>
             
             <li className="sidebarListItem">
-              <BarChartIcon className="sidebarIcon" />
-              Reports
+              <LiveTvIcon className="sidebarIcon" />
+              Go to Netflix UI
             </li>
           </ul>
         </div>
