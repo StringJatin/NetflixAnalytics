@@ -14,7 +14,7 @@ export default function Home({type}) {
     const getRandomLists = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/lists${type ? "?type=" + type : ""}${
+          `https://netflix-analytics-4u5n.vercel.app/api/lists${type ? "?type=" + type : ""}${
             genre ? "&genre=" + genre : ""
           }`,
           {
@@ -36,7 +36,7 @@ export default function Home({type}) {
   useEffect(() => {
     const fetchAllMovies = async () => {
       try {
-        const movieResponse = await axios.get('http://localhost:3000/api/movies/', {
+        const movieResponse = await axios.get('https://netflix-analytics-4u5n.vercel.app/api/movies/', {
           headers: {
             token:  'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
           },

@@ -16,7 +16,7 @@ const Featured = ({type}) => {
   useEffect(()=>{
     const randomContent = async ()=>{
       try{
-        const res = await axios.get(`http://localhost:3000/api/movies/random?type=${type}`,{
+        const res = await axios.get(`https://netflix-analytics-4u5n.vercel.app/api/movies/random?type=${type}`,{
           headers:{
             token : `Bearer ` + JSON.parse(localStorage.getItem("user")).accessToken,
           },

@@ -19,7 +19,7 @@ const Register = () => {
       setPassword(passwordRef.current.value);
       const username = email.split("@")[0];
       try {
-        await axios.post("http://localhost:3000/api/auth/register", { email, username, password });
+        await axios.post("https://netflix-analytics-4u5n.vercel.app/api/auth/register", { email, username, password });
         console.log("user is created");
         navigate("/login");
       } catch (err) {
