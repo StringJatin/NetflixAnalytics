@@ -69,11 +69,13 @@ const Sidebar = () => {
                 List
               </li>
               </Link>
-            
+            <Link to={"https://netflix-clone-gamma-amber.vercel.app"} className='noCss'>
             <li className="sidebarListItem">
               <LiveTvIcon className="sidebarIcon" />
               Go to Netflix UI
             </li>
+            </Link>
+            
           </ul>
         </div>
         <div className="sidebarMenu">
