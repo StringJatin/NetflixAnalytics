@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./home.scss";
+import "./Home.scss";
 import Navbar from '../../components/navbar/Navbar';
 import Featured from '../../components/featured/Featured';
 import List from '../../components/list/List';
