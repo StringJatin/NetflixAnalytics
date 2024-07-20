@@ -1,31 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./NewList.css";
 import axios from "axios";
 
 export default function NewList() {
-  const [list, setList] = useState(null);
-  const [movies,setMovies] = useState([]);
-  
- useEffect (()=>{
-    const allMovies = async ()=>{
-        try{
-            const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/movies/",{
-                headers: {
-                    token : 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
-    
-                }
-               
-            }
-            )
-            setMovies(res.data);
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
-    allMovies();
- },[])
+  const [list, setList] = useState({
+    title: "",
+    genre: "",
+    type: "",
+    content: [],
+  });
+  const [movies, setMovies] = useState([]);
+  const selectRef = useRef(null);
 
+  useEffect(() => {
+    const allMovies = async () => {
+      try {
+        const res = await axios.get("https://netflix-analytics-4u5n.vercel.app/api/movies/", {
+          headers: {
+            token: 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    allMovies();
+  }, []);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -39,26 +40,34 @@ export default function NewList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    // Make sure list state is not null before making the request
+
     if (list) {
       const createMovie = async () => {
         try {
           const newMovie = await axios.post("https://netflix-analytics-4u5n.vercel.app/api/lists/", list, {
             headers: {
-                token :'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
+              token: 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
             },
           });
-          alert("New list is created")
+          console.log(newMovie);
+          alert("New list is created");
+          setList({
+            title: "",
+            genre: "",
+            type: "",
+            content: [],
+          });
+          if (selectRef.current) {
+            selectRef.current.value = null;
+          }
         } catch (err) {
           console.log(err);
         }
       };
-  
+
       createMovie();
     }
   };
-  
 
   return (
     <div className="newProduct">
@@ -71,6 +80,7 @@ export default function NewList() {
               type="text"
               placeholder="Popular Movies"
               name="title"
+              value={list.title}
               onChange={handleChange}
             />
           </div>
@@ -80,12 +90,13 @@ export default function NewList() {
               type="text"
               placeholder="action"
               name="genre"
+              value={list.genre}
               onChange={handleChange}
             />
           </div>
           <div className="addProductItem">
             <label>Type</label>
-            <select name="type" onChange={handleChange}>
+            <select name="type" value={list.type} onChange={handleChange}>
               <option>Type</option>
               <option value="movie">Movie</option>
               <option value="series">Series</option>
@@ -99,6 +110,7 @@ export default function NewList() {
               multiple
               name="content"
               onChange={handleSelect}
+              ref={selectRef}
               style={{ height: "280px" }}
             >
               {movies.map((movie) => (
