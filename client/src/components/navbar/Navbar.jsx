@@ -4,15 +4,27 @@ import React, { useState } from 'react'
 import "./navbar.scss"
 import NetflixImage from '../../images/Netflix_Logo_RGB.png'
 import userImage from '../../images/user_image.jpg'
+import { AuthContext } from '../../context/authContext/AuthContext';
+import { useContext } from 'react';
+import { logout } from '../../../../dashboard/src/context/authContext/AuthActions';
 
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { Link } from 'react-router-dom';
 const Navbar = () => {
+  const {dispatch} = useContext(AuthContext);
   const [isScrolled,setIsScrolled] = useState(false);
   window.onscroll=()=>{
     setIsScrolled(window.scrollY === 0 ? false : true);
     return()=>(window.onscroll = null);
   };
+
+  const handleLogout = () => {
+    dispatch(logout);
+   localStorage.removeItem("user");
+    window.location.reload();
+  };
+
+
   return (
     <div className= {isScrolled ? 'navbar scrolled' : 'navbar'}>
       <div className='container'>
@@ -34,7 +46,7 @@ const Navbar = () => {
         <ExpandMoreIcon className='icon'/>
         <div className='options'>
         <span>Settings</span>
-        <span>Logout</span>
+        <span onClick={handleLogout}>Logout</span>
         </div>
         
         
