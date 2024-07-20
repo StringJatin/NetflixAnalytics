@@ -6,28 +6,6 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 // Register
-// router.post("/register", async (req, res) => {
-//   const { username, email, password } = req.body;
-// console.log(req.body);
-
-//   try {
-//     // Encrypt the password using CryptoJS AES
-//     const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.SECRET_KEY).toString();
-
-//     // Create a new user with the encrypted password
-//     const newUser = new User({
-//       username,
-//       email,
-//       password: encryptedPassword,
-//     });
-
-//     // Save the user to the database
-//     const user = await newUser.save();
-//     res.status(201).json(user);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
