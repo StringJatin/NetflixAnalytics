@@ -23,6 +23,7 @@ const App = () => {
             <Route exact path="/" element={<Home  />} />
             <Route path="/movies" element={<Home type="movie" />} />
             <Route path="/series" element={<Home type="series" />} />
+            <Route path="/watch" element={ <Watch/> } />
           </>
         )}
         <Route path="/" element={<Navigate to="/login" />}/>

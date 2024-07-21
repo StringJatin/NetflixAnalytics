@@ -41,21 +41,15 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}/>
       </Routes>
-      
-
-       
-
         {user && (
           <>
             <div className="top">
               <Topbar />
             </div>
-
             <div className="container">
               <Sidebar />
               <Routes>
                 <Route path="/" element={<Home />} />
-               
                 <Route path="/user" element={<User />} />
                 <Route path="/user/:userId" element={<UserPage />} />
                 <Route path="/newUser" element={<NewUser />} />

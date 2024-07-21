@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./WidgetSm.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import axios from "axios";
+import { logout } from "../../context/authContext/AuthActions";
+import { AuthContext } from "../../context/authContext/AuthContext";
 const WidgetSm = () => {
   const [newUsers, setNewUsers] = useState();
+  const {dispatch} = useContext(AuthContext);
   useEffect(() => {
     const getNewUsers = async () => {
       try {
@@ -18,7 +21,13 @@ const WidgetSm = () => {
         );
         setNewUsers(res.data);
       } catch (err) {
-        console.log(err);
+        if (err.response && err.response.status === 403) {
+          localStorage.removeItem("user");
+          dispatch(logout());
+          window.location.reload();
+        } else {
+          console.log(err);
+        }
       }
     };
     getNewUsers();

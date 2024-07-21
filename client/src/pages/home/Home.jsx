@@ -56,20 +56,10 @@ export default function Home({type}) {
     fetchAllMovies();
   }, []);
   
-// const {user} = useContext(AuthContext);
-// console.log(user)
-
-  // console.log("lists content",lists.content);
   return (
     <div className='home'>
       <Navbar/>
       <Featured type={type} setGenre={genre} />
-      {/* {lists.map((list)=>{
-        <List list={list} />
-      })} */}
-      {/* {lists.map((list) => (
-        <List list={list} />
-      ))} */}
       {lists
       .filter(list => list.content.length > 0) // Filter out lists with no content
       .map((list) => (
