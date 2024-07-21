@@ -104,6 +104,12 @@ const ProductList = () => {
 
   return (
     <div className="productList">
+     <div className="productTitleContainer">
+        <h1 className="productTitle">All Movies / Series</h1>
+        <Link to="/newProduct">
+          <button className="productAddButton">Create</button>
+        </Link>
+      </div>
       <Box sx={{ height: 600, width: "100%" }}>
         <DataGrid
           rows={data}
