@@ -6,9 +6,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext/AuthContext';
 import axios from 'axios';
+import Loader from '../../components/loader/Loader';
 
 const User = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -32,9 +33,23 @@ const User = () => {
     getUsers();
   }, [user]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  }
+
+  const handleDelete = async(id) => {
+    const confirmed = window.confirm('Are you sure you wish to delete this item?');
+    if (confirmed) {
+      try {
+        await axios.delete(`https://netflix-analytics-4u5n.vercel.app/api/users/${id}`, {
+          headers: {
+            token: 'Bearer ' + user.accessToken,
+          }
+        });
+        setData(prevItems => prevItems.filter(item => item.id !== id)); // Update based on 'id'
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+  };
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -93,8 +108,13 @@ const User = () => {
     },
   ];
 
+  if(!data) return <Loader/>
+
   return (
     <div className='user'>
+     <div className="productTitleContainer">
+        <h1 className="productTitle">All Users</h1>
+      </div>
       <Box sx={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={data}
